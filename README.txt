@@ -1,10 +1,13 @@
 # gtm-engagement
 
-<!-- 
-
+<!--
 Smart Analytics Page Engagement Tracking 
 
 Based on scripts found on http://riveted.parsnip.io
+
+Modified by Smart Analytics DK
+
+Import GTM containter and merge with your exisitng tags.
 
 Remember to change the Google Settings on the Event to use your own Google Analytics ID!
 
