@@ -1,0 +1,466 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2017-08-30 12:21:53",
+    "containerVersion": {
+        "path": "accounts/1700096033/containers/7444443/versions/0",
+        "accountId": "1700096033",
+        "containerId": "7444443",
+        "containerVersionId": "0",
+        "container": {
+            "path": "accounts/1700096033/containers/7444443",
+            "accountId": "1700096033",
+            "containerId": "7444443",
+            "name": "Engagement Only",
+            "publicId": "GTM-W9RSG69",
+            "usageContext": [
+                "WEB"
+            ],
+            "fingerprint": "1504095231108",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/1700096033/containers/7444443/workspaces?apiLink=container"
+        },
+        "tag": [
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "tagId": "2",
+                "name": "00_ReadMe_EngagementEvent",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<!-- \n\nSmart Analytics Page Engagement Tracking \n\nBased on scripts found on http://riveted.parsnip.io\n\nRemember to change the Google Settings on the Event to use your own Google Analytics ID!\n\nFeatures:\n   1) Scroll percent, 10% increments \n   2) Scroll pixel depth, 250 pixel increments \n   3) Active time on page, 5 second increments\n\t\t- stops timer when window is not visible or no movement/interaction for 30 sec \n\nEvent Labeling:\n\nCategory: Engagement\n\nAction: Active Time\nLabel: <time spent>\n\nAction: Scroll Percent\nLabel: <percent scrolled>\n\nAction: Scroll Pixels\nLabel: <pixel depth scrolled>\n-->"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1504095079202",
+                "parentFolderId": "5",
+                "tagFiringOption": "ONCE_PER_EVENT"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "tagId": "6",
+                "name": "Event_Engagement_Time-Scroll",
+                "type": "ua",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "nonInteraction",
+                        "value": "true"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "overrideGaSettings",
+                        "value": "true"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventValue",
+                        "value": "{{eventValue}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventCategory",
+                        "value": "{{eventCategory}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackType",
+                        "value": "TRACK_EVENT"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventAction",
+                        "value": "{{eventAction}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventLabel",
+                        "value": "{{eventLabel}}"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "trackingId",
+                        "value": "UA-12345678-9"
+                    }
+                ],
+                "fingerprint": "1503946496349",
+                "firingTriggerId": [
+                    "21",
+                    "22",
+                    "23",
+                    "24"
+                ],
+                "parentFolderId": "5",
+                "tagFiringOption": "ONCE_PER_EVENT"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "tagId": "15",
+                "name": "JS_ActiveTime",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script type=\"text/javascript\">\n    var riveted = function() {\n        function e(e) {\n            e = e || {}, g = parseInt(e.reportInterval, 10) || 5, p = parseInt(e.idleTimeout, 10) || 30, k = e.gaGlobal || \"ga\", \"function\" == typeof window[k] && (y = !0), \"undefined\" != typeof _gaq && \"function\" == typeof _gaq.push && (w = !0), \"undefined\" != typeof dataLayer && \"function\" == typeof dataLayer.push && (h = !0), I = \"gaTracker\" in e && \"string\" == typeof e.gaTracker ? e.gaTracker + \".send\" : \"primary.send\", \"function\" == typeof e.eventHandler && (s = e.eventHandler), \"function\" == typeof e.userTimingHandler && (m = e.userTimingHandler), T = \"nonInteraction\" in e && (e.nonInteraction === !1 || \"false\" === e.nonInteraction) ? !1 : !0, t(document, \"keydown\", f), t(document, \"click\", f), t(window, \"mousemove\", n(f, 500)), t(window, \"scroll\", n(f, 500)), t(document, \"visibilitychange\", a), t(document, \"webkitvisibilitychange\", a)\n        }\n\n        function n(e, n) {\n            var t, i, a, o = null,\n                r = 0,\n                u = function() {\n                    r = new Date, o = null, a = e.apply(t, i)\n                };\n            return function() {\n                var c = new Date;\n                r || (r = c);\n                var d = n - (c - r);\n                return t = this, i = arguments, 0 >= d ? (clearTimeout(o), o = null, r = c, a = e.apply(t, i)) : o || (o = setTimeout(u, d)), a\n            }\n        }\n\n        function t(e, n, t) {\n            e.addEventListener ? e.addEventListener(n, t, !1) : e.attachEvent ? e.attachEvent(\"on\" + n, t) : e[\"on\" + n] = t\n        }\n\n        function i() {\n            clearTimeout(H), r()\n        }\n\n        function a() {\n            (document.hidden || document.webkitHidden) && i()\n        }\n\n        function o() {\n            _ += 1, _ > 0 && _ % g === 0 && s(_)\n        }\n\n        function r() {\n            L = !0, clearTimeout(E)\n        }\n\n        function u() {\n            i(), b = !0\n        }\n\n        function c() {\n            b = !1\n        }\n\n        function d() {\n            L = !1, clearTimeout(E), E = setInterval(o, 1e3)\n        }\n\n        function l() {\n            var e = new Date,\n                n = e - D;\n            R = !0, m(n), E = setInterval(o, 1e3)\n        }\n\n        function v() {\n            D = new Date, _ = 0, R = !1, L = !1, clearTimeout(E), clearTimeout(H)\n        }\n\n        function f() {\n            b || (R || l(), L && d(), clearTimeout(H), H = setTimeout(i, 1e3 * p + 100))\n        }\n        var s, m, g, p, T, y, w, I, h, k, R = !1,\n            L = !1,\n            b = !1,\n            _ = 0,\n            D = new Date,\n            E = null,\n            H = null;\n        return m = function(e) {\n            h ? dataLayer.push({\n                event: \"RivetedTiming\",\n                eventCategory: \"Engagement\",\n                timingVar: \"First Interaction\",\n                timingValue: e\n            }) : (y && window[k](I, \"timing\", \"Engagement\", \"First Interaction\", e), w && _gaq.push([\"_trackTiming\", \"Engagement\", \"First Interaction\", e, null, 100]))\n        }, s = function(e) {\n            h ? dataLayer.push({\n                event: \"Riveted\",\n                eventCategory: \"Engagement\",\n                eventAction: \"Seconds Active\",\n                eventLabel: e,\n                eventValue: 0,\n                eventNonInteraction: T\n            }) : (y && window[k](I, \"event\", \"Engagement\", \"Seconds Active\", e.toString(), g, {\n                nonInteraction: T\n            }), w && _gaq.push([\"_trackEvent\", \"Engagement\", \"Seconds Active\", e.toString(), g, T]))\n        }, {\n            init: e,\n            trigger: f,\n            setIdle: i,\n            on: c,\n            off: u,\n            reset: v\n        }\n    }();\n    riveted.init();\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1504094644828",
+                "firingTriggerId": [
+                    "2147479553"
+                ],
+                "parentFolderId": "5",
+                "tagFiringOption": "ONCE_PER_EVENT"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "tagId": "16",
+                "name": "JS_ScrollDepth",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script>\n    ! function(e, n, t) {\n        \"use strict\";\n        var r, o, i, l, a = {\n                minHeight: 0,\n                elements: [],\n                percentage: !0,\n                userTiming: !0,\n                pixelDepth: !0,\n                nonInteraction: !0,\n                gaGlobal: !1,\n                gtmOverride: !1\n            },\n            c = e(n),\n            u = [],\n            p = !1,\n            s = 0;\n        e.scrollDepth = function(h) {\n            function g(e, t, a, c) {\n                l ? (l({\n                    event: \"ScrollDistance\",\n                    eventCategory: \"Engagement\",\n                    eventAction: e,\n                    eventLabel: t,\n                    eventValue: 0,\n                    eventNonInteraction: h.nonInteraction\n                }), h.pixelDepth && arguments.length > 2 && a > s && (s = a, l({\n                    event: \"ScrollDistance\",\n                    eventCategory: \"Engagement\",\n                    eventAction: \"Scroll Pixels\", \n                    eventLabel: D(a),\n                    eventValue: 0,\n                    eventNonInteraction: h.nonInteraction\n                })), h.userTiming && arguments.length > 3 && l({\n                    event: \"ScrollTiming\",\n                    eventCategory: \"Engagement\",\n                    eventAction: e,\n                    eventLabel: t,\n                    eventTiming: c\n                })) : (r && (n[i](\"send\", \"event\", \"Scroll Percent\", e, t, 1, {\n                    nonInteraction: h.nonInteraction\n                }), h.pixelDepth && arguments.length > 2 && a > s && (s = a, n[i](\"send\", \"event\", \"Scroll Percent\", \"Scroll Pixels\", D(a), 1, {\n                    nonInteraction: h.nonInteraction\n                })), h.userTiming && arguments.length > 3 && n[i](\"send\", \"timing\", \"Scroll Percent\", e, c, t)), o && (_gaq.push([\"_trackEvent\", \"Scroll Percent\", e, t, 1, h.nonInteraction]), h.pixelDepth && arguments.length > 2 && a > s && (s = a, _gaq.push([\"_trackEvent\", \"Scroll Percent\", \"Scroll Pixels\", D(a), 1, h.nonInteraction])), h.userTiming && arguments.length > 3 && _gaq.push([\"_trackTiming\", \"Scroll Percent\", e, c, t, 100])))\n            }\n\n            function f(e) {\n                return {\n                    \"10%\": parseInt(.1 * e, 10),\n                    \"20%\": parseInt(.2 * e, 10),\n                    \"30%\": parseInt(.3 * e, 10),\n                    \"40%\": parseInt(.4 * e, 10),\n                    \"50%\": parseInt(.5 * e, 10),\n                    \"60%\": parseInt(.6 * e, 10),\n                    \"70%\": parseInt(.7 * e, 10),\n                    \"80%\": parseInt(.8 * e, 10),\n                    \"90%\": parseInt(.9 * e, 10),\n                    \"100%\": e - 5\n                }\n            }\n\n            function v(n, t, r) {\n                e.each(n, function(n, o) {\n                    -1 === e.inArray(n, u) && t >= o && (g(\"Scroll Percent\", n, t, r), u.push(n)) \n                })\n            }\n\n            function m(n, t, r) {\n                e.each(n, function(n, o) {\n                    -1 === e.inArray(o, u) && e(o).length && t >= e(o).offset().top && (g(\"Elements\", o, t, r), u.push(o))\n                })\n            }\n\n            function D(e) {\n                return (250 * Math.floor(e / 250)).toString()\n            }\n\n            function d() {\n                I()\n            }\n\n            function y(e, n) {\n                var t, r, o, i = null,\n                    l = 0,\n                    a = function() {\n                        l = new Date, i = null, o = e.apply(t, r)\n                    };\n                return function() {\n                    var c = new Date;\n                    l || (l = c);\n                    var u = n - (c - l);\n                    return t = this, r = arguments, 0 >= u ? (clearTimeout(i), i = null, l = c, o = e.apply(t, r)) : i || (i = setTimeout(a, u)), o\n                }\n            }\n\n            function I() {\n                p = !0, c.on(\"scroll.scrollDepth\", y(function() {\n                    var r = e(t).height(),\n                        o = n.innerHeight ? n.innerHeight : c.height(),\n                        i = c.scrollTop() + o,\n                        l = f(r),\n                        a = +new Date - S;\n                    return u.length >= h.elements.length + (h.percentage ? 10 : 0) ? (c.off(\"scroll.scrollDepth\"), void(p = !1)) : (h.elements && m(h.elements, i, a), void(h.percentage && v(l, i, a)))\n                }, 500))\n            }\n            var S = +new Date;\n            h = e.extend({}, a, h), e(t).height() < h.minHeight || (h.gaGlobal ? (r = !0, i = h.gaGlobal) : \"function\" == typeof ga ? (r = !0, i = \"ga\") : \"function\" == typeof __gaTracker && (r = !0, i = \"__gaTracker\"), \"undefined\" != typeof _gaq && \"function\" == typeof _gaq.push && (o = !0), \"function\" == typeof h.eventHandler ? l = h.eventHandler : \"undefined\" == typeof dataLayer || \"function\" != typeof dataLayer.push || h.gtmOverride || (l = function(e) {\n                dataLayer.push(e)\n            }), e.scrollDepth.reset = function() {\n                u = [], s = 0, c.off(\"scroll.scrollDepth\"), I()\n            }, e.scrollDepth.addElements = function(n) {\n                \"undefined\" != typeof n && e.isArray(n) && (e.merge(h.elements, n), p || I())\n            }, e.scrollDepth.removeElements = function(n) {\n                \"undefined\" != typeof n && e.isArray(n) && e.each(n, function(n, t) {\n                    var r = e.inArray(t, h.elements),\n                        o = e.inArray(t, u); - 1 != r && h.elements.splice(r, 1), -1 != o && u.splice(o, 1)\n                })\n            }, d())\n        }\n    }(jQuery, window, document);\n    jQuery(function() {\n        jQuery.scrollDepth();\n    });\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1504091566304",
+                "firingTriggerId": [
+                    "2147479553"
+                ],
+                "parentFolderId": "5",
+                "tagFiringOption": "ONCE_PER_EVENT"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "tagId": "18",
+                "name": "JS_Visibility",
+                "type": "html",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "html",
+                        "value": "<script type=\"text/javascript\">\n  if (typeof {{JS_VisibilityPrefix}} !== 'undefined') {\n    var visibilityEvent = {{JS_VisibilityPrefix}} + 'visibilitychange',\n        hiddenState = {{JS_VisibilityHidden}},\n        visibilityChanged = function() {\n          if (typeof hiddenState !== 'undefined') {\n            dataLayer.push({\n              'event' : 'visibilityChange'\n            });\n          }\n        };\n    document.addEventListener(visibilityEvent, visibilityChanged, false);\n  }\n</script>"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "supportDocumentWrite",
+                        "value": "false"
+                    }
+                ],
+                "fingerprint": "1503945635655",
+                "firingTriggerId": [
+                    "2147479553"
+                ],
+                "parentFolderId": "5",
+                "tagFiringOption": "ONCE_PER_EVENT"
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "triggerId": "22",
+                "name": "EventAuto_ActiveTiming",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "RivetedTiming"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1503946111573",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "triggerId": "21",
+                "name": "EventAuto_Engagement_Main",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "Riveted"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1503946158170",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "triggerId": "23",
+                "name": "EventAuto_ScrollDistance",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "ScrollDistance"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1504095193648",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "triggerId": "24",
+                "name": "EventAuto_ScrollTiming",
+                "type": "CUSTOM_EVENT",
+                "customEventFilter": [
+                    {
+                        "type": "EQUALS",
+                        "parameter": [
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg0",
+                                "value": "{{_event}}"
+                            },
+                            {
+                                "type": "TEMPLATE",
+                                "key": "arg1",
+                                "value": "ScrollTiming"
+                            }
+                        ]
+                    }
+                ],
+                "fingerprint": "1504095207402",
+                "parentFolderId": "5"
+            }
+        ],
+        "variable": [
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "variableId": "47",
+                "name": "JS_VisibilityHidden",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n  switch ({{JS_VisibilityPrefix}}) {\n    case '':\n      return document['hidden'];\n    case 'moz':\n      return document['mozHidden'];\n    case 'o':\n      return document['oHidden'];\n    case 'webkit':\n      return document['webkitHidden'];\n    default:\n      return;\n  }\n}"
+                    }
+                ],
+                "fingerprint": "1504082245678",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "variableId": "46",
+                "name": "JS_VisibilityPrefix",
+                "type": "jsm",
+                "parameter": [
+                    {
+                        "type": "TEMPLATE",
+                        "key": "javascript",
+                        "value": "function() {\n  var prefixes = ['moz', 'ms', 'o', 'webkit'];\n\n  if ('hidden' in document) {\n    return '';\n  }\n\n  for (var i = 0; i < prefixes.length; i++) {\n    var testPrefix = prefixes[i] + 'Hidden';\n    if (testPrefix in document) {\n      return prefixes[i];\n    }\n  }\n\n  return;\n}"
+                    }
+                ],
+                "fingerprint": "1504082261685",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "variableId": "50",
+                "name": "eventAction",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventAction"
+                    }
+                ],
+                "fingerprint": "1503945635632",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "variableId": "51",
+                "name": "eventCategory",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventCategory"
+                    }
+                ],
+                "fingerprint": "1503945635633",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "variableId": "52",
+                "name": "eventLabel",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventLabel"
+                    }
+                ],
+                "fingerprint": "1503945635634",
+                "parentFolderId": "5"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "variableId": "54",
+                "name": "eventValue",
+                "type": "v",
+                "parameter": [
+                    {
+                        "type": "INTEGER",
+                        "key": "dataLayerVersion",
+                        "value": "2"
+                    },
+                    {
+                        "type": "BOOLEAN",
+                        "key": "setDefaultValue",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "name",
+                        "value": "eventValue"
+                    }
+                ],
+                "fingerprint": "1503945635636",
+                "parentFolderId": "5"
+            }
+        ],
+        "folder": [
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "folderId": "5",
+                "name": "Engagement",
+                "fingerprint": "1503946742279"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "type": "PAGE_URL",
+                "name": "Page URL"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "type": "PAGE_HOSTNAME",
+                "name": "Page Hostname"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "type": "PAGE_PATH",
+                "name": "Page Path"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "type": "REFERRER",
+                "name": "Referrer"
+            },
+            {
+                "accountId": "1700096033",
+                "containerId": "7444443",
+                "type": "EVENT",
+                "name": "Event"
+            }
+        ],
+        "fingerprint": "0",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/1700096033/containers/7444443/versions/0?apiLink=version"
+    }
+}
